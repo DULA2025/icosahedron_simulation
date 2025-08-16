@@ -1,0 +1,52 @@
+Create a high-performance, 3D physics simulation in Python.
+
+Core Task:
+Simulate a sphere bouncing realistically inside a rotating icosahedron. The entire simulation should be pre-calculated and then rendered offline to a high-quality, animated GIF file.
+
+Key Requirements:
+
+    Geometry:
+
+        The container must be a perfect, 12-vertex, 20-sided icosahedron.
+
+        The sphere must be a separate object.
+
+    Physics:
+
+        The sphere must be affected by a constant gravitational force.
+
+        Collisions between the sphere and the inner faces of the icosahedron must be detected accurately.
+
+        Bounces must be realistic, using a restitution parameter to control energy loss on impact and a friction parameter to slow the sphere as it slides along a face.
+
+    Animation:
+
+        The icosahedron must rotate continuously at a constant speed around a fixed, tilted axis.
+
+        The sphere's motion must be calculated frame-by-frame based on its velocity, gravity, and collisions.
+
+Technology Stack:
+
+    Language: Python 3
+
+    3D Rendering: pyvista
+
+    Numerical Operations: numpy
+
+    3D Rotations: scipy (specifically the scipy.spatial.transform.Rotation class for robust, quaternion-based rotation).
+
+    Performance: The core physics calculation loop must be accelerated with numba's @jit(nopython=True) decorator for maximum speed.
+
+Implementation Details:
+
+    Structure: The script should be organized into logical sections: parameter configuration, geometry generation, the Numba-accelerated physics engine, a main simulation loop to pre-calculate all frames, and a final rendering loop to generate the GIF.
+
+    Physics Logic: For collision detection, the normals of the icosahedron's faces should be calculated to point inward. The physics logic for detection, positional correction, and velocity reflection must be consistent with these inward-pointing normals.
+
+    Configuration: All key parameters (duration, FPS, gravity, restitution, friction, radii, initial velocities, etc.) should be grouped together in a Config class for easy modification.
+
+Final Output:
+
+    The script should run from the command line, print its progress (simulation and rendering stages), and save the final animation as a GIF file (e.g., icosahedron_simulation.gif).
+
+    The final animation should be smooth, physically plausible, and visually appealing.
